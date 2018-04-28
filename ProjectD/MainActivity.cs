@@ -4,7 +4,7 @@ using Android.OS;
 
 namespace ProjectD
 {
-    [Activity(Label = "ProjectD", MainLauncher = true)]
+    [Activity(Label = "ProjectD")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
