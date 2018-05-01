@@ -48,23 +48,25 @@ namespace ProjectD
             {
                 JsonObject JSONresult;
                 string username = "", password = "";
-                if (UserNameText.Text.Length > 0 && PassWordText.Text.Length > 0)
+                if (UserNameText.Text.Length > 0)
                 {
                     var getuser = new HttpPost();
-                    var result = getuser.GetUserByJson("http://www.nakago.cc", "UserNameText.Text");//这里是网站地址（字符串）,和传入的参数（字符串）顺便得到一个服务器的返回数据
-                    if (result.StartsWith("{") || result.StartsWith("[")) JSONresult = (JsonObject)JsonObject.Parse(result);//判断是否是Json数据
-                    else JSONresult = (JsonObject)JsonObject.Parse("{\"Success\": false,\"Reason\":\"" + result+"\"}");//不是则改成json数据
-                    if (JSONresult["Success"] == true)//判断json数据中的Success项
-                    {
-                        username = JSONresult["UserName"];//把json格式数据的UserName项的值赋给username
-                        password = JSONresult["PassWord"];
-                        if (username.Equals(UserNameText.Text) && password.Equals(PassWordText.Text))//判断字符串是否一样
+                    var result = getuser.CheckUserByJson("http://www.nakago.cc/User/CheckUser", UserNameText.Text, PassWordText.Text);//这里是网站地址（字符串）,和传入的参数（字符串）顺便得到一个服务器的返回数据
+                    //if (result.StartsWith("{") || result.StartsWith("[")) JSONresult = (JsonObject)JsonObject.Parse(result);//判断是否是Json数据
+                    //else JSONresult = (JsonObject)JsonObject.Parse("{\"Success\": false,\"Reason\":\"" + result+"\"}");//不是则改成json数据
+                    //if (JSONresult["Success"] == true)//判断json数据中的Success项
+                    //{
+                        if (result.Equals("true"))//判断字符串是否一样
                         {
                             Android.Widget.Toast.MakeText(this, "登录成功", Android.Widget.ToastLength.Short).Show();
                             var table = db.Table<UserTable>();//查找本地数据库是否有此用户
                             foreach (var user in table)
                             {
-                                if (user.UserName.Equals(UserNameText.Text) && user.PassWord.Equals(PassWordText.Text)) return;//查到存在则退出
+                                if (user.UserName.Equals(UserNameText.Text) && user.PassWord.Equals(PassWordText.Text))
+                                {
+                                    Android.Widget.Toast.MakeText(this, "登录成功", Android.Widget.ToastLength.Short).Show();
+                                    return;//查到存在则退出
+                                }
                             }
                             var data = new UserTable();//没找到就会执行到这
                             data.UserName = UserNameText.Text;
@@ -73,13 +75,13 @@ namespace ProjectD
                         }
                         else
                         {
-                            Android.Widget.Toast.MakeText(this, "登录失败:" + "用户名或密码错误", Android.Widget.ToastLength.Short).Show();
+                            Android.Widget.Toast.MakeText(this, "登录失败:用户名或密码错误", Android.Widget.ToastLength.Short).Show();
                         }
-                    }
-                    else
-                    {
-                        Android.Widget.Toast.MakeText(this, "登录失败:"+result, Android.Widget.ToastLength.Short).Show();
-                    }
+                    //}
+                    //else
+                    //{
+                        //Android.Widget.Toast.MakeText(this, "登录失败:"+result, Android.Widget.ToastLength.Short).Show();
+                    //}
                 }
             };
             /*注册按钮按下执行的东西*/
@@ -89,10 +91,11 @@ namespace ProjectD
                 var postuser = new HttpPost();
                 if (UserNameText.Text.Length > 0)
                 {
-                    var result = postuser.PostUserByJson("http://www.nakago.cc", "UserNameText.Text", "PassWordText.Text");//这里是网站地址（字符串）,和传入的参数（字符串）顺便得到一个服务器的返回数据
-                    if (result.StartsWith("{") || result.StartsWith("[")) JSONresult = (JsonObject)JsonObject.Parse(result);//判断是否是Json数据
-                    else JSONresult = (JsonObject)JsonObject.Parse("{\"Success\": false,\"Reason\":\"" + result + "\"}");
-                    if (JSONresult["Success"] == true)
+                    var result = postuser.PostUserByJson("http://www.nakago.cc/User/PostUser", UserNameText.Text, PassWordText.Text);//这里是网站地址（字符串）,和传入的参数（字符串）顺便得到一个服务器的返回数据
+                    //if (result.StartsWith("{") || result.StartsWith("[")) JSONresult = (JsonObject)JsonObject.Parse(result);//判断是否是Json数据
+                    //else JSONresult = (JsonObject)JsonObject.Parse("{\"Success\": false,\"Reason\":\"" + result + "\"}");
+                    //if (JSONresult["Success"] == true)
+                    if (result.Equals("true"))
                     {
                         Android.Widget.Toast.MakeText(this, "注册成功", Android.Widget.ToastLength.Short).Show();
                         var data = new UserTable();

@@ -14,12 +14,11 @@ namespace HttpCommunication
         /// Json方式 查询用户名和密码
         /// </summary>
         /// <returns></returns>
-        public string GetUserByJson(string ReqURL,string name)
+        public string CheckUserByJson(string ReqURL,string name, string password)
         {
-            string requestData = "{'OrderCode':'GetUser','UserName':'"+ name + "'}";
-
             Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("RequestData", WebUtility.UrlEncode(requestData));
+            param.Add("UserName", name);
+            param.Add("PassWord", password);
 
             string result = sendPost(ReqURL, param);
             return result;
@@ -31,10 +30,10 @@ namespace HttpCommunication
         /// <returns></returns>
         public string PostUserByJson(string ReqURL, string name, string password)
         {
-            string requestData = "{'OrderCode':'PostUser','UserName':'" + name + "','PassWord': '" + password + "'}";
 
             Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("RequestData", WebUtility.UrlEncode(requestData));
+            param.Add("UserName", name);
+            param.Add("PassWord", password);
 
             string result = sendPost(ReqURL, param);
             return result;
@@ -68,15 +67,16 @@ namespace HttpCommunication
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.ContentType = "application/x-www-form-urlencoded";
-                request.Referer = url;
-                request.Accept = "*/*";
-                request.Timeout = 30 * 1000;
-                request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)";
+                //request.Referer = url;
+                //request.Accept = "*/*";
+                request.Timeout = 30 * 200;
+                //request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)";
                 request.Method = "POST";
+                request.ServicePoint.Expect100Continue = false;
                 request.ContentLength = byteData.Length;
                 Stream stream = request.GetRequestStream();
                 stream.Write(byteData, 0, byteData.Length);
-                stream.Flush();
+                //stream.Flush();
                 stream.Close();
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream backStream = response.GetResponseStream();
