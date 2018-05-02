@@ -13,6 +13,8 @@ namespace ProjectD
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+            TextView text = FindViewById<TextView>(Resource.Id.textView);
+            text.Text = "Hellow : "+Intent.GetStringExtra("User");
         }
     }
 }

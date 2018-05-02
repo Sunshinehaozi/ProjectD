@@ -44,44 +44,47 @@ namespace ProjectD
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f04000c
-			public const int LogIn = 2130968588;
-			
-			// aapt resource value: 0x7f040009
-			public const int PassWord = 2130968585;
-			
-			// aapt resource value: 0x7f04000b
-			public const int SignIn = 2130968587;
-			
-			// aapt resource value: 0x7f040006
-			public const int UserName = 2130968582;
-			
-			// aapt resource value: 0x7f040005
-			public const int autocomplete_country = 2130968581;
-			
-			// aapt resource value: 0x7f040003
-			public const int linearLayout1 = 2130968579;
-			
-			// aapt resource value: 0x7f040007
-			public const int linearLayout2 = 2130968583;
-			
-			// aapt resource value: 0x7f040002
-			public const int linearLayout3 = 2130968578;
-			
-			// aapt resource value: 0x7f040000
-			public const int linearLayout4 = 2130968576;
+			// aapt resource value: 0x7f04000d
+			public const int LogIn = 2130968589;
 			
 			// aapt resource value: 0x7f04000a
-			public const int linearLayout5 = 2130968586;
+			public const int PassWord = 2130968586;
 			
-			// aapt resource value: 0x7f040001
-			public const int linearLayout6 = 2130968577;
+			// aapt resource value: 0x7f04000c
+			public const int SignIn = 2130968588;
+			
+			// aapt resource value: 0x7f040007
+			public const int UserName = 2130968583;
+			
+			// aapt resource value: 0x7f040006
+			public const int autocomplete_country = 2130968582;
 			
 			// aapt resource value: 0x7f040004
-			public const int textView1 = 2130968580;
+			public const int linearLayout1 = 2130968580;
 			
 			// aapt resource value: 0x7f040008
-			public const int textView2 = 2130968584;
+			public const int linearLayout2 = 2130968584;
+			
+			// aapt resource value: 0x7f040003
+			public const int linearLayout3 = 2130968579;
+			
+			// aapt resource value: 0x7f040001
+			public const int linearLayout4 = 2130968577;
+			
+			// aapt resource value: 0x7f04000b
+			public const int linearLayout5 = 2130968587;
+			
+			// aapt resource value: 0x7f040002
+			public const int linearLayout6 = 2130968578;
+			
+			// aapt resource value: 0x7f040000
+			public const int textView = 2130968576;
+			
+			// aapt resource value: 0x7f040005
+			public const int textView1 = 2130968581;
+			
+			// aapt resource value: 0x7f040009
+			public const int textView2 = 2130968585;
 			
 			static Id()
 			{
